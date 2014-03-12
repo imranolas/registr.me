@@ -17,6 +17,7 @@ end
 
 group :development do
   gem 'growl'
+  gem 'guard-spork'
 end
 
 
