@@ -7,17 +7,28 @@ gem 'rails', '3.2.17'
 
 gem 'sqlite3'
 gem 'devise'
+gem 'haml-rails'
+gem "twitter-bootstrap-rails"
 gem "rspec-rails", :group => [:test, :development]
+
 
 group :test do
   gem "factory_girl_rails"
   gem "capybara"
   gem "guard-rspec"
+  gem 'capybara-email'
 end
 
 group :development do
   gem 'growl'
   gem 'guard-spork'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
+  gem 'binding_of_caller'
+  gem 'better_errors'
+  gem 'letter_opener'
+  gem 'launchy'
 end
 
 
