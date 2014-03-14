@@ -15,7 +15,7 @@ FactoryGirl.define do
 
   factory :klass do |f|
     f.sequence(:name) { |n| "Class ##{n}"}
-    f.attendance sample(50..100)
+    f.attendance 75
   end
 
 end

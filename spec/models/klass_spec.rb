@@ -9,6 +9,12 @@ describe Klass do
 
   context 'valid Klass' do
     subject(:klass) { create(:klass) }
+    let(:student) { create(:student) }
 
+    it 'should associate with students' do
+      3.times { klass.students << create(:student) }
+      klass.students.count.should eql 3 
+      klass.students.should_not be_empty
+    end
   end
 end
