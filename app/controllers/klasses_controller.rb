@@ -44,7 +44,7 @@ class KlassesController < ApplicationController
 
     respond_to do |format|
       if @klass.save
-        format.html { redirect_to @klass, notice: 'Klass was successfully created.' }
+        format.html { redirect_to klass_build_path(@klass.id, :lesson_details ), notice: 'Klass was successfully created.' }
         format.json { render json: @klass, status: :created, location: @klass }
       else
         format.html { render action: "new" }
