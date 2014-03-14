@@ -10,6 +10,7 @@ gem 'devise'
 gem 'haml-rails'
 gem "twitter-bootstrap-rails"
 gem "rspec-rails", :group => [:test, :development]
+gem "wicked"
 
 
 group :test do
