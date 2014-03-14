@@ -32,6 +32,11 @@
               %li= link_to "Login", new_user_session_path unless current_user
               %li= link_to "Logout", destroy_user_session_path, method: :delete if current_user
               %li= link_to "Link 3", "/path3"
+              = drop_down "Products" do 
+                = menu_item "Latest", '#'
+                = menu_item "Top Sellers", '#'
+                = drop_down_divider 
+                = menu_item render 'shared/new_user'
 
     .container-fluid
 
