@@ -1,5 +1,8 @@
 Attend::Application.routes.draw do
 
+  resources :lessons
+
+
   resources :klasses
 
 

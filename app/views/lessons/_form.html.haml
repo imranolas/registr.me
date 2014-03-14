@@ -1,0 +1,22 @@
+= form_for @lesson do |f|
+  - if @lesson.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@lesson.errors.count, "error")} prohibited this lesson from being saved:"
+      %ul
+        - @lesson.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :date_time
+    = f.datetime_select :date_time
+  .field
+    = f.label :teacher
+    = f.text_field :teacher
+  .field
+    = f.label :klass
+    = f.text_field :klass
+  .field
+    = f.label :room
+    = f.text_field :room
+  .actions
+    = f.submit 'Save'
