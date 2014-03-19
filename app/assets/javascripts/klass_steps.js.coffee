@@ -8,3 +8,15 @@ $ ->
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
+
+  # $('.datetime_picker').datetimepicker({
+  #   language: 'pt-BR'
+  # });
+  
+
+  $('input.tokenize').on('tokenfield:createtoken',
+    (e) ->
+       # Über-simplistic e-mail validation
+      console.log('ssdf')
+      $(e.relatedTarget).addClass('invalid')
+  ).tokenfield()

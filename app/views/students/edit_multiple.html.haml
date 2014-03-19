@@ -1,0 +1,13 @@
+%h1 Edit Checked Students
+
+= form_tag update_multiple_students_path, method: :put do
+  - @students.each do |student|
+    = hidden_field_tag "student_ids[]", student.id
+    %h5= student.name
+  = simple_fields_for Student.new do |f|
+
+    .field
+      = f.association :klasses, collection: Klass.all, as: :check_boxes, input_html: { data: {toggle: 'checkbox'}}, label: 'Classes'
+
+  .actions
+    = submit_tag "Update"

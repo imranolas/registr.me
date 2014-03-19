@@ -8,6 +8,48 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
+ *= require bootstrap-tokenfield
+ *= require bootstrap
  *= require_tree .
+ *= require_self
  */
+
+select {
+-webkit-appearance: menulist;
+box-sizing: border-box;
+align-items: center;
+border: 1px solid;
+border-image-source: initial;
+border-image-slice: initial;
+border-image-width: initial;
+border-image-outset: initial;
+border-image-repeat: initial;
+white-space: pre;
+-webkit-rtl-ordering: logical;
+color: black;
+background-color: white;
+cursor: default;
+}
+
+select {
+font: 500 18px/1em 'Helvetica Neue', 'Varela Round' !important;
+border-radius: 5px;
+border: 1px solid #E5E5E5;
+height: 49px !important;
+line-height: 49px;
+padding: 12px;
+}
+
+.controls>.radio:first-child, .controls>.checkbox:first-child {
+ padding-top: 0px; 
+}
+
+.form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
+padding-top: 0px;
+margin-top: 0;
+margin-bottom: 0;
+}
+
+body > div.container-fluid > div > div.span9 > form > table > tbody > tr:nth-child(1) > td:nth-child(1) > label {
+margin-top: 5px;
+}

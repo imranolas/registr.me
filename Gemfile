@@ -8,10 +8,14 @@ gem 'rails', '3.2.17'
 gem 'sqlite3'
 gem 'devise'
 gem 'haml-rails'
-gem "twitter-bootstrap-rails"
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'bootstrap_tokenfield_rails'
 gem "rspec-rails", :group => [:test, :development]
 gem "wicked"
-
+gem 'designmodo-flatuipro-rails'
+gem 'jquery-ui-rails'
+gem "rails-backbone"
+gem 'simple_form'
 
 group :test do
   gem "factory_girl_rails"

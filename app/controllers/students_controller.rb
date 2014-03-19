@@ -80,4 +80,24 @@ class StudentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def edit_multiple
+    if params[:student_ids]
+      @students = Student.find(params[:student_ids])
+    else
+      redirect_to students_path
+    end
+  end
+
+  def update_multiple
+    @students = Student.find(params[:student_ids])
+    @students.reject! do |student|
+      student.update_attributes(params[:student].reject { |k,v| v.blank? })
+    end
+    if @students.empty?
+      redirect_to students_path
+    else
+      render "edit_multiple"
+    end
+  end
 end

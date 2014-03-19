@@ -7,14 +7,14 @@
           %li= msg
 
   .field
-    = f.label :date_time
+    = f.label :date_time, value: 'Class Time'
     = f.datetime_select :date_time
   .field
-    = f.label :teacher
-    = f.text_field :teacher
+    = f.label :teacher_id
+    = f.collection_select(:teacher_id, Teacher.all, :id, :name)
   .field
     = f.label :klass
-    = f.text_field :klass
+    = f.collection_select(:klass_id, Klass.all, :id, :name)
   .field
     = f.label :room
     = f.text_field :room

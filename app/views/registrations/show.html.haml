@@ -1,0 +1,6 @@
+%h3= @lesson.klass.name
+%h5= @lesson.date_time
+
+- @lesson.registrations.each do |registration|
+  .student_register= registration.student.name
+  = check_box_tag :registration

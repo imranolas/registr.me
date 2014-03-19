@@ -16,5 +16,9 @@ describe Klass do
       klass.students.count.should eql 3 
       klass.students.should_not be_empty
     end
+
+    context "klass with a attendance greater than 100"
+    subject(:klass) { build(:klass, attendance: 101) }
+    it { should_not be_valid }
   end
 end
