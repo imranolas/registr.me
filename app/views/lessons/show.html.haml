@@ -9,11 +9,11 @@
 %p
   %strong= model_class.human_attribute_name(:teacher_id) + ':'
   %br
-  = @lesson.teacher_id
+  = @lesson.teacher.name
 %p
   %strong= model_class.human_attribute_name(:klass_id) + ':'
   %br
-  = @lesson.klass_id
+  = @lesson.klass.name
 %p
   %strong= model_class.human_attribute_name(:room) + ':'
   %br
@@ -28,6 +28,8 @@
 %ul.nav.nav-tabs#Tabs
   %li.active
     %a{ href: "#students", 'data-toggle' => "tab" } Students
+  %li
+    %a{ href: "#attendance", 'data-toggle' => "tab" } Attendance
 
 /  Tab panes 
 .tab-content
@@ -52,4 +54,23 @@
               - else
                 = raw("<span class='input-icon fui-cross-inverted'></span>")
             %td
-              %span.badge= student.klasses.count 
+              %span.badge= student.klasses.count
+
+  .tab-pane.fade#attendance
+    - model_class = Registration
+    %table.table.table-striped
+      %thead
+        %tr
+          %th= "id"
+          %th= 'Name'
+          %th= 'Attendance'
+      %tbody
+        - @lesson.registrations.each do |registration|
+          %tr
+            %td= link_to registration.student.id, student_path(registration.student)
+            %td= registration.student.name
+            %td
+              - if registration.attended
+                = raw("<span class='input-icon fui-check-inverted'></span>")
+              - else
+                = raw("<span class='input-icon fui-cross-inverted'></span>")

@@ -1,13 +1,14 @@
 - model_class = Klass
 .page-header
   %h1=t '.title', :default => 'class'.pluralize.titleize
-%table.table.table-striped
+%table.table
   %thead
     %tr
       %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:teacher_id)
       %th= 'Attendance required'
+      %th= 'Overall Attendance'
       %th= model_class.human_attribute_name(:lessons)
       %th= model_class.human_attribute_name(:students)
       %th=t '.actions', :default => t("helpers.actions")
@@ -18,6 +19,7 @@
         %td= klass.name
         %td= klass.teacher.name
         %td #{klass.attendance}%
+        %td= klass.overall_attendance
         %td
           %span.badge= klass.lessons.count
         %td

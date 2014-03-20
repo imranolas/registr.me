@@ -10,9 +10,33 @@
  *
  *= require bootstrap-tokenfield
  *= require bootstrap
+ *= require bootstrap-datetimepicker
  *= require_tree .
  *= require_self
  */
+
+@font-face {
+    font-family: 'franchiseregular';
+    src: url('/franchise-bold-webfont.eot');
+    src: url('/franchise-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/franchise-bold-webfont.woff') format('woff'),
+         url('/franchise-bold-webfont.ttf') format('truetype'),
+         url('/franchise-bold-webfont.svg#franchiseregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'aleo-regular';
+    src: url('/aleo-regular-webfont.eot');
+    src: url('/aleo-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/aleo-regular-webfont.woff') format('woff'),
+         url('/aleo-regular-webfont.ttf') format('truetype'),
+         url('/aleo-regular-webfont.svg#aleo-regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 select {
 -webkit-appearance: menulist;
@@ -32,24 +56,64 @@ cursor: default;
 }
 
 select {
-font: 500 18px/1em 'Helvetica Neue', 'Varela Round' !important;
-border-radius: 5px;
-border: 1px solid #E5E5E5;
-height: 49px !important;
-line-height: 49px;
-padding: 12px;
+  font: 500 18px/1em 'Helvetica Neue', 'Varela Round' !important;
+  border-radius: 5px;
+  border: 1px solid #E5E5E5;
+  height: 49px !important;
+  line-height: 49px;
+  padding: 12px;
 }
 
 .controls>.radio:first-child, .controls>.checkbox:first-child {
- padding-top: 0px; 
+   padding-top: 0px; 
 }
 
 .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
-padding-top: 0px;
-margin-top: 0;
-margin-bottom: 0;
+  padding-top: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 body > div.container-fluid > div > div.span9 > form > table > tbody > tr:nth-child(1) > td:nth-child(1) > label {
-margin-top: 5px;
+  margin-top: 5px;
+}
+
+.has-switch label {
+  height: 29px;
+  width: 29px;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  font-family: 'aleo-regular'
+}
+
+#canvas-container{
+    display:block;
+    /*width:80%;*/
+    /*padding:50px 10%;*/
+    height:300px;
+} 
+
+.navbar-inner {
+  background: 0;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+   background-color: #fff; 
+   opacity: 1; 
+   display: none;
+   visibility: visible; 
+  -moz-box-shadow: none;
+  -moz-transition: 0;
+  -o-transition: 0;
+  -webkit-transition: 0;
+   top: 0;
+   left: 0;
+   width: 250px;
+   padding: 4px;
+   margin-top: 1px;
+   z-index: 3000;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
 }

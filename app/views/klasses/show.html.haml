@@ -1,19 +1,15 @@
 - model_class = Klass
 .page-header
-  %h1=t '.title', :default => 'class'.titleize
+  %h1 Class #{@klass.name}
 
 %p
-  %strong= model_class.human_attribute_name(:name) + ':'
-  %br
-  = @klass.name
-%p
   %strong= model_class.human_attribute_name(:teacher_id) + ':'
-  %br
-  = @klass.teacher_id
+  = @klass.teacher.name
 %p
-  %strong= model_class.human_attribute_name(:attendance) + ':'
-  %br
-  = @klass.attendance
+  %strong= 'Attendance required' + ':'
+  #{@klass.attendance}%
+#canvas-container
+  %canvas#myChart{height: 100, width: 100}
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), klasses_path, :class => 'btn btn-primary'
@@ -30,21 +26,7 @@
 .tab-content
   / Home tab
   .tab-pane.fade.in.active#lessons
-    - model_class = Lesson
-    %table.table.table-striped
-      %thead
-        %tr
-          %th= model_class.human_attribute_name(:id)
-          %th= 'Lesson time'
-          %th= model_class.human_attribute_name(:teacher_id)
-          %th= model_class.human_attribute_name(:room)
-      %tbody
-        - @klass.lessons.each do |lesson|
-          %tr
-            %td= link_to lesson.id, lesson_path(lesson)
-            %td= lesson.date_time.to_datetime.strftime('%d %b %Y, %H:%M%p') if lesson.date_time
-            %td= lesson.teacher.name if lesson.teacher
-            %td= lesson.room
+    = render partial: 'shared/lesson_table', locals: {lessons: @klass.lessons}
 
   .tab-pane.fade#students
     - model_class = Student
@@ -70,3 +52,32 @@
 
 
 
+:javascript
+  var lineChartData = #{@klass.lessons_hash_for_charts.to_json}
+
+
+  //Get the canvas & context
+    var c = $('#myChart');
+    var ct = c.get(0).getContext('2d');
+    var container = $(c).parent();
+
+    //Run function when browser resizes
+    $(window).resize( respondCanvas );
+
+    function respondCanvas(){ 
+        c.attr('width', $(container).width() ); //max width
+        c.attr('height', $(container).height() ); //max height
+
+        new Chart(document.getElementById("myChart").getContext("2d")).Line(lineChartData,{
+          bezierCurve : false,
+          scaleOverride : true,
+          scaleSteps : #{@klass.students.count},
+          scaleStepWidth : 1,
+          scaleStartValue : 0
+        });
+
+        //Call a function to redraw other content (texts, images etc)
+    }
+
+    //Initial call 
+    respondCanvas();

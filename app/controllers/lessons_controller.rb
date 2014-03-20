@@ -2,7 +2,8 @@ class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
   def index
-    @lessons = Lesson.order(:date_time)
+    @upcoming = Lesson.upcoming
+    @past = Lesson.past
 
     respond_to do |format|
       format.html # index.html.erb

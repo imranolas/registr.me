@@ -20,13 +20,17 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-tokenfield
+//= require bootstrap-datetimepicker
 //= require flatuipro
 //= require_tree .
 
 $(function(){
   // $('.checkbox').checkbox();
   $('#Tabs a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
+    e.preventDefault()
+    $(this).tab('show')
+  })
+
+  $("[data-toggle='switch']").wrap('<div class="switch" />').parent().bootstrapSwitch();
+
 });

@@ -1,8 +1,9 @@
-%h2 You're almost done! Now create a password to securely access your account.
-= form_for(resource, :as => resource_name, :url => confirm_path) do |f|
+%h2 You're almost done!
+%p Now create a password to securely access your account.
+= form_for(resource, :as => resource_name, :url => confirm_path, html: { class: 'span5' }) do |f|
   = devise_error_messages!
-  = text_field_tag :name
-  = f.password_field :password
-  = f.password_field :password_confirmation
+  = text_field_tag :name, nil, placeholder: 'full name'
+  = f.password_field :password, placeholder: 'password'
+  = f.password_field :password_confirmation, placeholder: 'confirm password'
   = f.hidden_field :confirmation_token, {value: params[:confirmation_token]}
-  = f.submit "Confirm Account"
+  = f.submit "Confirm Account", class: 'btn btn-primary'

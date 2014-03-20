@@ -1,6 +1,6 @@
 class Klasses::BuildController < ApplicationController
 include Wicked::Wizard
-  steps :lesson_details, :student_details
+  steps :lesson_details
   
   def show
     @klass = Klass.find(params[:klass_id])

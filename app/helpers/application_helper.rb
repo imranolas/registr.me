@@ -23,5 +23,14 @@ module ApplicationHelper
   def is_today?(datetime)
     datetime.between?(DateTime.now.beginning_of_day, DateTime.now.end_of_day)
   end
+
+  def display_tick(value)
+    if value
+      raw("<span class='input-icon fui-check-inverted'></span>")
+    else
+      raw("<span class='input-icon fui-cross-inverted'></span>")
+    end
+  end
+
   
 end

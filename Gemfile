@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'devise'
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'bootstrap-datetimepicker-rails'
 gem 'bootstrap_tokenfield_rails'
 gem "rspec-rails", :group => [:test, :development]
 gem "wicked"
@@ -16,6 +17,7 @@ gem 'designmodo-flatuipro-rails'
 gem 'jquery-ui-rails'
 gem "rails-backbone"
 gem 'simple_form'
+gem 'faker'
 
 group :test do
   gem "factory_girl_rails"

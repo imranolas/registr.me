@@ -8,4 +8,6 @@ class Lesson < ActiveRecord::Base
 
   validates :date_time, presence: true
   
+  scope :upcoming, -> { where('lessons.date_time > ?', DateTime.now ).order('date_time DESC') }
+  scope :past, -> { where('lessons.date_time < ?', DateTime.now ).order('date_time ASC') }
 end

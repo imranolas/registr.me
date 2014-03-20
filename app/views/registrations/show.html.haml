@@ -1,6 +1,13 @@
 %h3= @lesson.klass.name
 %h5= @lesson.date_time
 
-- @lesson.registrations.each do |registration|
-  .student_register= registration.student.name
-  = check_box_tag :registration
+.table-responsive
+  %table.table.table-striped
+    %tbody
+      - @lesson.registrations.each do |registration|
+        %tr
+          %td
+            = registration.student.name
+          %td
+            .switch.switch-square{ 'data-on-label' => "<i class='fui-check'></i>", 'data-off-label' => "<i class='fui-cross'></i>" }
+              = check_box_tag :attended, value = 'true', registration.attended, data: { remote: true, url: url_for( action: :update, id: registration.id), method: :put }
