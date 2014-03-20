@@ -1,6 +1,8 @@
-= form_for(resource, :as => resource_name, :url => user_registration_path, class: 'navbar-form', remote: true) do |f|
-  %div
-    = f.label :email, "Invite a user"
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div= f.submit "Sign up", class: 'btn btn-primary'
+= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), remote: true, :html => {:method => :post} do |f|
+  = devise_error_messages!
+
+  = f.input :name
+  = f.input :email
+
+  = f.submit t("devise.invitations.new.submit_button"), class: 'btn btn-primary'
+

@@ -1,6 +1,6 @@
 Attend::Application.routes.draw do
 
-  devise_for :users, :controllers => {:confirmations => 'confirmations'}
+  devise_for :users, :controllers => { :invitations => 'users/invitations'}
 
     devise_scope :user do
       put "/confirm" => "confirmations#confirm"

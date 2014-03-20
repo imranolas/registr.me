@@ -8,4 +8,8 @@ class Teacher < ActiveRecord::Base
   def self.collection_for_select
     self.all.map { |t| ["#{self.user.email}", t.id]}
   end
+
+  def name
+    user.name
+  end
 end

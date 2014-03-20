@@ -7,6 +7,7 @@ gem 'rails', '3.2.17'
 
 gem 'sqlite3'
 gem 'devise'
+gem 'devise_invitable'
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'bootstrap-datetimepicker-rails'

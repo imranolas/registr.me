@@ -28,19 +28,20 @@
             %span.icon-bar
           %a.brand(href="#") registr.me
           .container.nav-collapse
+            %p.navbar-text= "logged in as #{current_user.email}" if current_user
             %ul.nav
               %li= link_to "LOGIN", new_user_session_path unless current_user
               %li= link_to "LOGOUT", destroy_user_session_path, method: :delete if current_user
                   
               = drop_down raw("<span class='fui-gear'></span>") do 
-                = menu_item "Account", '#'
+                = menu_item "Account", edit_user_registration_path
                 = drop_down_divider 
                 = menu_item render 'shared/new_user'
 
     .container-fluid
 
       .row-fluid
-        .span3
+        .span2
           .sidebar-nav
             %ul.nav.nav-list
               %li.nav-header Sidebar
