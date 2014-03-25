@@ -16,9 +16,10 @@ gem "rspec-rails", :group => [:test, :development]
 gem "wicked"
 gem 'designmodo-flatuipro-rails'
 gem 'jquery-ui-rails'
-gem "rails-backbone"
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'simple_form'
 gem 'faker'
+gem 'acts_as_commentable_with_threading'
 
 group :test do
   gem "factory_girl_rails"

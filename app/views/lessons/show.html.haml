@@ -9,11 +9,11 @@
 %p
   %strong= model_class.human_attribute_name(:teacher_id) + ':'
   %br
-  = @lesson.teacher.name
+  = @lesson.teacher.try(:name)
 %p
   %strong= model_class.human_attribute_name(:klass_id) + ':'
   %br
-  = @lesson.klass.name
+  = @lesson.klass.try(:name)
 %p
   %strong= model_class.human_attribute_name(:room) + ':'
   %br

@@ -1,0 +1,7 @@
+%br
+%br
+%h4 Import #{title}
+
+= form_tag path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Import", class: 'btn btn-primary'

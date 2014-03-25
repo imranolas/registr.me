@@ -1,4 +1,4 @@
-= simple_form_for @klass, url: wizard_path, html: {class: 'span5' } do |f|
+= form_for @klass, url: wizard_path do |f|
   - if @klass.errors.any?
     #error_explanation
       %h2= "#{pluralize(@klass.errors.count, "error")} prohibited this class from being saved:"
@@ -28,5 +28,5 @@
       event.preventDefault()
 
     $('.datetimepicker').datetimepicker({
-        language: 'pt-BR'
-      })
+      language: 'pt-BR'
+    })

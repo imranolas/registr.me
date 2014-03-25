@@ -7,18 +7,26 @@ Attend::Application.routes.draw do
     end
 
 
-  resources :registrations
 
-
-  resources :lessons
-  resources :klasses do
-    resources :build, controller: 'klasses/build'
-  end
 
   put 'students/edit_multiple', to: 'students#edit_multiple', as: 'edit_multiple_students'
   put 'students/update_multiple', to: 'students#update_multiple', as: 'update_multiple_students'
+  put 'lessons/edit_multiple', to: 'lessons#edit_multiple', as: 'edit_multiple_lessons'
+  put 'lessons/update_multiple', to: 'lessons#update_multiple', as: 'update_multiple_lessons'
   
-  resources :students
+  resources :students do
+    collection { post :import }
+  end
+
+  resources :registrations
+
+  resources :comments
+  resources :lessons do
+    collection { post :import }
+  end
+  resources :klasses do
+    resources :build, controller: 'klasses/build'
+  end
   
   root to: 'home#index'
 

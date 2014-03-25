@@ -6,9 +6,8 @@
         - @lesson.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :date_time, value: 'Class Time'
-    = f.datetime_select :date_time
+  .field.bfh-datepicker{ data: { name: 'lesson[date]', date: @lesson.date, format: 'd-m-y'} }
+  .field.bfh-timepicker{ data: { name: 'lesson[time]', date: @lesson.time, format: 'H-M'} }
   .field
     = f.label :teacher_id
     = f.collection_select(:teacher_id, Teacher.all, :id, :name)

@@ -1,13 +1,49 @@
-%h3= @lesson.klass.name
-%h5= @lesson.date_time
+%h3= link_to "Class #{@lesson.klass.name}", @lesson.klass
+%h5= @lesson.date_time.to_datetime.strftime('%d %b %Y | %H:%M')
 
 .table-responsive
-  %table.table.table-striped
-    %tbody
-      - @lesson.registrations.each do |registration|
-        %tr
-          %td
-            = registration.student.name
-          %td
-            .switch.switch-square{ 'data-on-label' => "<i class='fui-check'></i>", 'data-off-label' => "<i class='fui-cross'></i>" }
-              = check_box_tag :attended, value = 'true', registration.attended, data: { remote: true, url: url_for( action: :update, id: registration.id), method: :put }
+  .table.form_table
+    - @lesson.registrations.each do |registration|
+      = form_for registration, remote: true do |f|
+        .name
+          = registration.student.name
+        .attendance
+          .switch.switch-square{ 'data-on-label' => "<i class='fui-check'></i>", 'data-off-label' => "<i class='fui-cross'></i>" }
+            = f.hidden_field :attended, {value: false}
+            = f.check_box :attended, { class: 'attended'}, true, false
+        .attendance_options
+          = f.label :late, class: 'checkbox late' do
+            = f.hidden_field :late, {value: false}
+            = f.check_box :late, { data: { toggle: 'checkbox' }}, true, false
+            late?
+
+          = f.label :absence_approved, class: 'checkbox absent' do
+            = f.hidden_field :absence_approved, {value: false}
+            = f.check_box :absence_approved, { data: { toggle: 'checkbox' }}, true, false
+            absence approved?
+
+:javascript
+  function hideCheckboxes(el) {
+    if($(el).is(':checked')) {
+      $(el).parents('form:first').find('.absent').hide(0,function(){
+        $(this).removeClass('checked').find(':checkbox').removeAttr('checked');
+      });
+      $(el).parents('form:first').find('.late').show(0);
+    } else {
+      $(el).parents('form:first').find('.late').hide(0,function(){
+        $(this).removeClass('checked').find(':checkbox').removeAttr('checked');
+      });
+      $(el).parents('form:first').find('.absent').show(0);
+    }
+  }
+
+  $('input[type=checkbox]').on('change', function(ev) {
+    if($(this).hasClass('attended')) {
+      hideCheckboxes(this);
+    }
+    $(this).parents('form:first').submit();
+  });
+
+  $('.attended').each(function(i,el){
+    hideCheckboxes(el);
+  })

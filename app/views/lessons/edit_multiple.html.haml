@@ -1,0 +1,13 @@
+%h1 Edit Checked Lessons
+
+= form_tag update_multiple_lessons_path, method: :put do
+  - @lessons.each do |lesson|
+    = hidden_field_tag "lesson_ids[]", lesson.id
+    %h5 #{lesson.date}, #{lesson.time}, #{lesson.room}
+  = simple_fields_for Lesson.new do |f|
+
+    .field
+      = f.association :klass, collection: Klass.all, as: :radio, input_html: { data: {toggle: 'radio'}}, label: 'Classes'
+
+  .actions
+    = submit_tag "Update"

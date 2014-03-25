@@ -10,9 +10,10 @@
  *
  *= require bootstrap-tokenfield
  *= require bootstrap
- *= require bootstrap-datetimepicker
  *= require_tree .
+ *= require flat-ui
  *= require_self
+ *= require bootstrap-datetimepicker
  */
 
 @font-face {
@@ -38,30 +39,55 @@
 
 }
 
-select {
--webkit-appearance: menulist;
-box-sizing: border-box;
-align-items: center;
-border: 1px solid;
-border-image-source: initial;
-border-image-slice: initial;
-border-image-width: initial;
-border-image-outset: initial;
-border-image-repeat: initial;
-white-space: pre;
--webkit-rtl-ordering: logical;
-color: black;
-background-color: white;
-cursor: default;
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  visibility: visible;
+  opacity: 1;
+  margin: 2px 0 0;
+  font-size: 14px;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  webkit-transition: 0s; */
+  -moz-transition: 0s;
+  -o-transition: 0s;
+   transition: 0s; 
 }
 
 select {
-  font: 500 18px/1em 'Helvetica Neue', 'Varela Round' !important;
+  -webkit-appearance: menulist;
+  box-sizing: border-box;
+  align-items: center;
+  border: 1px solid;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  white-space: pre;
+  -webkit-rtl-ordering: logical;
+  color: black;
+  background-color: white;
+  cursor: default;
+  /*font: 500 18px/1em 'Helvetica Neue', 'Varela Round' !important;*/
   border-radius: 5px;
   border: 1px solid #E5E5E5;
-  height: 49px !important;
+  height: 39px !important;
   line-height: 49px;
   padding: 12px;
+  width: inherit;
 }
 
 .controls>.radio:first-child, .controls>.checkbox:first-child {
@@ -91,29 +117,105 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     display:block;
     /*width:80%;*/
     /*padding:50px 10%;*/
-    height:300px;
+    height:350px;
 } 
+
+canvas, #legend {
+  float: left;
+}
 
 .navbar-inner {
   background: 0;
 }
 
-.bootstrap-datetimepicker-widget.dropdown-menu {
-   background-color: #fff; 
-   opacity: 1; 
-   display: none;
-   visibility: visible; 
-  -moz-box-shadow: none;
-  -moz-transition: 0;
-  -o-transition: 0;
-  -webkit-transition: 0;
-   top: 0;
-   left: 0;
-   width: 250px;
-   padding: 4px;
-   margin-top: 1px;
-   z-index: 3000;
-   -webkit-border-radius: 4px;
-   -moz-border-radius: 4px;
-   border-radius: 4px;
+.datepicker {
+visibility: visible;
+opacity: 1;
+width: auto;
+}
+
+.form_table { display: table; } 
+.form_table>* { display: table-row; }
+.form_table>*>* { display: table-cell; vertical-align: top; }
+
+input[id^=klass_lessons_attribute] {
+  max-width: 170px !important;
+}
+
+.page-header > * {
+  display: inline;
+  padding-left: 20px;
+}
+
+.page-header > p {
+  font-size: 16px;
+}
+
+.legend .title {
+display: block;
+margin: 0.5em;
+border-style: solid;
+border-width: 0 0 0 1em;
+padding: 0 0.3em;
+}
+
+.table .checkbox, .table .radio {
+  display: inline;
+  margin: 5px 0 5px 12px;
+}
+
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+}
+ 
+table.table thead .sorting { background: url('sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('sort_desc.png') no-repeat center right; }
+ 
+table.table thead .sorting_asc_disabled { background: url('sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('sort_desc_disabled.png') no-repeat center right; }
+
+/*table.dataTable tr.odd, table.dataTable tr.even {
+  background-color: inherit; 
+}
+
+table.dataTable tr.danger > td {
+  background-color: #fdefed;
+  border-color: #fadbd8;
+}*/
+
+.dataTables_paginate, .dataTables_filter {
+float: right;
+}
+
+.dataTables_paginate > a {
+  margin: 0 5px;
+}
+
+
+.dataTables_wrapper .row {
+  margin: 20px 0;
+}
+
+@media (max-width: 767px) {
+
+  input[id^=klass_lessons_attribute] {
+    max-width: inherit !important;
+  }
+
+  select {
+    width: 100%;
+  }
+
+  .table {
+   display: table; 
+  }
+
+  .page-header > * { display: block; }
+
 }

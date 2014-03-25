@@ -32,22 +32,24 @@
             %ul.nav
               %li= link_to "LOGIN", new_user_session_path unless current_user
               %li= link_to "LOGOUT", destroy_user_session_path, method: :delete if current_user
-                  
-              = drop_down raw("<span class='fui-gear'></span>") do 
-                = menu_item "Account", edit_user_registration_path
-                = drop_down_divider 
-                = menu_item render 'shared/new_user'
+              
+              - if current_user  
+                = drop_down raw("<span class='fui-gear'></span>") do 
+                  = menu_item "Account", edit_user_registration_path
+                  = drop_down_divider 
+                  = menu_item render 'shared/new_user'
 
     .container-fluid
 
       .row-fluid
         .span2
-          .sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Classes", klasses_path
-              %li= link_to "Lessons", lessons_path
-              %li= link_to "Students", students_path
+          - if current_user
+            .sidebar-nav
+              %ul.nav.nav-list
+                %li.nav-header Sidebar
+                %li= link_to "Classes", klasses_path
+                %li= link_to "Lessons", lessons_path
+                %li= link_to "Students", students_path
         .span9
           = bootstrap_flash
           = yield

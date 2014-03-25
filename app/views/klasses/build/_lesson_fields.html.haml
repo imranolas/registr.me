@@ -1,15 +1,11 @@
 .field
   .well.form-inline
     .datetimepicker.input-append.date
-      = f.text_field :date_time, { 'data-format' => 'dd/MM/yyyy hh:mm:ss' }
-      %span.add-on.fui-calendar
-    .control-group
-      = f.label :teacher_id
-      .controls
-        = f.collection_select(:teacher_id, Teacher.all, :id, :name, {selected: @klass.teacher.id })
-
-    .control-group
-      = f.label :room
-      .controls
-        = f.number_field :room
+      = f.text_field :date_time, { placeholder: 'date - time', data: { format: 'dd/MM/yyyy hh:mm:ss' }}
+      %span.add-on
+        %i{'data-time-icon'=>"icon-time", 'data-date-icon'=>"icon-calendar"}
+    / = f.label :teacher_id
+    = f.collection_select(:teacher_id, Teacher.all, :id, :name, {selected: @klass.teacher.id })
+    / = f.label :room
+    = f.text_field :room, { placeholder: 'Room name' }
     = link_to "Remove", '#', class: "remove_fields btn btn-primary"

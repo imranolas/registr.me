@@ -7,6 +7,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @students }
+      format.csv { send_data Student.to_csv }
     end
   end
 
@@ -35,6 +36,9 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
     @student = Student.find(params[:id])
+    @student.lessons.each do |lesson|
+      Registration.create(student_id: @student.id, lesson_id: lesson.id )
+    end
   end
 
   # POST /students
@@ -44,6 +48,9 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
+        @student.lessons.each do |lesson|
+          Registration.create(student_id: @student.id, lesson_id: lesson.id )
+        end
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render json: @student, status: :created, location: @student }
       else
@@ -93,11 +100,25 @@ class StudentsController < ApplicationController
     @students = Student.find(params[:student_ids])
     @students.reject! do |student|
       student.update_attributes(params[:student].reject { |k,v| v.blank? })
+      student.lessons.each do |lesson|
+        Registration.create(student_id: student.id, lesson_id: lesson.id )
+      end
     end
     if @students.empty?
       redirect_to students_path
     else
       render "edit_multiple"
     end
+  end
+
+  def add_comment
+    student = Student.find(params[:id])
+    Comment.build_from( student, current_user.id, params[:comment] )
+    redirect_to student
+  end
+
+  def import
+    Student.import(params[:file])
+    redirect_to root_url, notice: "Students imported."
   end
 end

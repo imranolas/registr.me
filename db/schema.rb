@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140320135237) do
+ActiveRecord::Schema.define(:version => 20140323134234) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "commentable_id",   :default => 0
+    t.string   "commentable_type"
+    t.string   "title"
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "user_id",          :default => 0, :null => false
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "klasses", :force => true do |t|
     t.string   "name"
@@ -46,9 +63,11 @@ ActiveRecord::Schema.define(:version => 20140320135237) do
   create_table "registrations", :force => true do |t|
     t.integer  "student_id"
     t.integer  "lesson_id"
-    t.boolean  "attended"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "attended",         :default => false, :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "late",             :default => false, :null => false
+    t.boolean  "absence_approved", :default => false, :null => false
   end
 
   add_index "registrations", ["lesson_id"], :name => "index_registrations_on_lesson_id"

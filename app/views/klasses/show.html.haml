@@ -2,14 +2,15 @@
 .page-header
   %h1 Class #{@klass.name}
 
-%p
-  %strong= model_class.human_attribute_name(:teacher_id) + ':'
-  = @klass.teacher.name
-%p
-  %strong= 'Attendance required' + ':'
-  #{@klass.attendance}%
+  %p
+    %strong= model_class.human_attribute_name(:teacher_id) + ':'
+    = @klass.teacher.name
+  %p
+    %strong= 'Attendance required' + ':'
+    #{@klass.attendance}%
 #canvas-container
   %canvas#myChart{height: 100, width: 100}
+  #legend
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), klasses_path, :class => 'btn btn-primary'
@@ -30,25 +31,22 @@
 
   .tab-pane.fade#students
     - model_class = Student
-    %table.table.table-striped
+    %table.table.data
       %thead
         %tr
-          %th= model_class.human_attribute_name(:id)
           %th= model_class.human_attribute_name(:name)
           %th= model_class.human_attribute_name(:active)
-          %th Classes
+          %th Attendance
       %tbody
         - @klass.students.each do |student|
-          %tr
-            %td= link_to student.id, student_path(student)
-            %td= student.name
+          %tr{ class: ("danger" unless student.attendance_met_for(@klass)) }
+            %td= link_to student.name, student_path(student)
             %td
               - if student.active
                 = raw("<span class='input-icon fui-check-inverted'></span>")
               - else
                 = raw("<span class='input-icon fui-cross-inverted'></span>")
-            %td
-              %span.badge= student.klasses.count 
+            %td #{@klass.attendance_for(student)}
 
 
 
@@ -66,7 +64,7 @@
 
     function respondCanvas(){ 
         c.attr('width', $(container).width() ); //max width
-        c.attr('height', $(container).height() ); //max height
+        c.attr('height', $(container).height() - 50 ); //max height
 
         new Chart(document.getElementById("myChart").getContext("2d")).Line(lineChartData,{
           bezierCurve : false,
@@ -78,6 +76,7 @@
 
         //Call a function to redraw other content (texts, images etc)
     }
+        legend(document.getElementById("legend"), lineChartData)
 
     //Initial call 
     respondCanvas();

@@ -36,12 +36,18 @@ class LessonsController < ApplicationController
   # GET /lessons/1/edit
   def edit
     @lesson = Lesson.find(params[:id])
+    @lesson.students.each do |student|
+      Registration.create(student_id: student.id, lesson_id: @lesson.id )
+    end
   end
 
   # POST /lessons
   # POST /lessons.json
   def create
     @lesson = Lesson.new(params[:lesson])
+    @lesson.students.each do |student|
+      Registration.create(student_id: student.id, lesson_id: @lesson.id )
+    end
 
     respond_to do |format|
       if @lesson.save
@@ -80,5 +86,31 @@ class LessonsController < ApplicationController
       format.html { redirect_to lessons_url }
       format.json { head :no_content }
     end
+  end
+
+  def edit_multiple
+    if params[:lesson_ids]
+      @lessons = Lesson.find(params[:lesson_ids])
+    else
+      redirect_to lessons_path
+    end
+  end
+
+  def update_multiple
+    @lessons = Lesson.find(params[:lesson_ids])
+    @lessons.reject! do |lesson|
+      lesson.update_attributes(params[:lesson].reject { |k,v| v.blank? })
+    end
+    if @lessons.empty?
+      redirect_to lessons_path
+    else
+      render "edit_multiple"
+    end
+  end
+
+
+  def import
+    Lesson.import(params[:file])
+    redirect_to root_url, notice: "Students imported."
   end
 end

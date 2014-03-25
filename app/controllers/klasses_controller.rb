@@ -44,7 +44,7 @@ class KlassesController < ApplicationController
 
     respond_to do |format|
       if @klass.save
-        format.html { redirect_to klass_build_path(@klass.id, :lesson_details ), notice: 'Klass was successfully created.' }
+        format.html { redirect_to @klass, notice: 'Klass was successfully created.' }
         format.json { render json: @klass, status: :created, location: @klass }
       else
         format.html { render action: "new" }
@@ -79,5 +79,10 @@ class KlassesController < ApplicationController
       format.html { redirect_to klasses_url }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Klass.import(params[:file])
+    redirect_to root_url, notice: "Students imported."
   end
 end

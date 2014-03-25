@@ -26,10 +26,14 @@ module ApplicationHelper
 
   def display_tick(value)
     if value
-      raw("<span class='input-icon fui-check-inverted'></span>")
+      raw("<span class='input-icon fui-check-inverted'> Active</span>")
     else
-      raw("<span class='input-icon fui-cross-inverted'></span>")
+      raw("<span class='input-icon fui-cross-inverted'> Inactive</span>")
     end
+  end
+
+  def datetime_field(object_name, method, options = {})
+    InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("datetime", options)
   end
 
   

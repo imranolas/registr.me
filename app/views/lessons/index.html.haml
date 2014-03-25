@@ -19,3 +19,5 @@
 
   .tab-pane.fade#past
     = render partial: 'shared/lesson_table', locals: {lessons: @past}
+
+= render partial: 'shared/csv_form', locals: { title: "Lessons", path: import_lessons_path }
