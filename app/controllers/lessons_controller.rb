@@ -8,6 +8,7 @@ class LessonsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @lessons }
+      format.csv { send_data Lesson.to_csv }
     end
   end
 

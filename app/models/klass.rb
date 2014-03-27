@@ -9,8 +9,14 @@ class Klass < ActiveRecord::Base
   validates :name, presence: true
   validates :attendance, presence: true
 
+  before_validation :set_attendance
+
   accepts_nested_attributes_for :lessons
   accepts_nested_attributes_for :students
+
+  def set_attendance
+    attendance ||= 75
+  end
 
   def overall_attendance
     if registrations.any?
@@ -65,7 +71,7 @@ class Klass < ActiveRecord::Base
           title: 'Late'
         }]
       }
-    lessons.includes(:registrations).each do |l|
+    lessons(:date_time).includes(:registrations).each do |l|
       hsh[:labels] << l.date_time.to_datetime.strftime('%d %b %Y')
       hsh[:datasets][0][:data] << l.registrations.where(attended: true).count
       hsh[:datasets][1][:data] << l.registrations.where(late: true).count
@@ -75,9 +81,9 @@ class Klass < ActiveRecord::Base
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      product = find_by_id(row["id"]) || new
-      product.attributes = row.to_hash.slice(*accessible_attributes)
-      product.save!
+      klass = find_by_id(row["id"]) || new
+      klass.attributes = row.to_hash.slice(*accessible_attributes)
+      klass.save!
     end
   end
 end

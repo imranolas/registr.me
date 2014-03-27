@@ -37,6 +37,28 @@ $(function(){
         ]
     });
 
+    $('.data_lessons').dataTable({
+        "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+        aoColumnDefs: [
+          {
+             bSortable: false,
+             aTargets: [ 0 ]
+          }
+        ],
+        aaSorting: [[1, 'asc']]
+    });
+
+    $('.data_past_lessons').dataTable({
+        "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+        aoColumnDefs: [
+          {
+             bSortable: false,
+             aTargets: [ 0 ]
+          }
+        ],
+        aaSorting: [[1, 'desc']]
+    });
+
 
 
   $('#Tabs a').click(function (e) {

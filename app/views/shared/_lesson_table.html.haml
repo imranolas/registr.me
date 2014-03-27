@@ -1,6 +1,7 @@
 - model_class = Lesson
+- title ||= nil
 = form_tag edit_multiple_lessons_path, method: :put do
-  %table.table.data
+  %table.table{class: (title || 'data_lessons')}
     %thead
       %tr
         %th= check_box_tag :select_all, true, false

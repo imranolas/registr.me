@@ -18,8 +18,8 @@ gem 'designmodo-flatuipro-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'simple_form'
-gem 'faker'
 gem 'acts_as_commentable_with_threading'
+gem 'prawn'
 
 group :test do
   gem "factory_girl_rails"
@@ -38,6 +38,7 @@ group :development do
   gem 'better_errors'
   gem 'letter_opener'
   gem 'launchy'
+  gem 'faker'
 end
 
 

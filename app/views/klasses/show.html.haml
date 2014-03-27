@@ -27,7 +27,7 @@
 .tab-content
   / Home tab
   .tab-pane.fade.in.active#lessons
-    = render partial: 'shared/lesson_table', locals: {lessons: @klass.lessons}
+    = render partial: 'shared/lesson_table', locals: {lessons: @klass.lessons.order(:date_time)}
 
   .tab-pane.fade#students
     - model_class = Student

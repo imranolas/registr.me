@@ -1,7 +1,7 @@
 class Registration < ActiveRecord::Base
   belongs_to :student
   belongs_to :lesson
-  attr_accessible :attended, :student_id, :lesson_id, :late, :absence_approved
+  attr_accessible :attended, :student_id, :lesson_id, :late, :absence_approved, :klass_id
 
   scope :completed_lessons, joins(:lesson).merge(Lesson.past)
   scope :by_student, ->(student) { where(registrations: {student_id: student.id}) }
@@ -13,15 +13,12 @@ class Registration < ActiveRecord::Base
   scope :unapproved_absence, -> { where(attended: false, absence_approved: false) }
 
   validates :student_id, uniqueness: { scope: :lesson_id }
+  validates :klass_id, presence: true
 
-  # before_update :set_attendance
+  # before_validation :set_klass_id
 
-  def set_attendance
-    if attended
-      self.absence_approved = false
-    else
-      self.late = false
-    end
+  def set_klass_id
+    self.klass_id ||= lesson.klass_id
   end
 
 end

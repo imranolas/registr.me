@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140323134234) do
+ActiveRecord::Schema.define(:version => 20140325115451) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -68,8 +68,10 @@ ActiveRecord::Schema.define(:version => 20140323134234) do
     t.datetime "updated_at",                          :null => false
     t.boolean  "late",             :default => false, :null => false
     t.boolean  "absence_approved", :default => false, :null => false
+    t.integer  "klass_id"
   end
 
+  add_index "registrations", ["klass_id"], :name => "index_registrations_on_klass_id"
   add_index "registrations", ["lesson_id"], :name => "index_registrations_on_lesson_id"
   add_index "registrations", ["student_id"], :name => "index_registrations_on_student_id"
 

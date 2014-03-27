@@ -10,6 +10,9 @@ class Lesson < ActiveRecord::Base
   validates :date_time, presence: true
 
   before_validation :set_date_time
+  after_save :create_registrations
+
+  default_scope { order(:date_time) }
   
   scope :upcoming, -> { where('lessons.date_time > ?', DateTime.now ).order('date_time DESC') }
   scope :past, -> { where('lessons.date_time < ?', DateTime.now ).order('date_time ASC') }
@@ -26,8 +29,12 @@ class Lesson < ActiveRecord::Base
     date_time.to_date.strftime('%d-%m-%Y')
   end
 
+  def date_us
+    date_time.to_datetime.strftime("%d/%m/%Y")
+  end
+
   def time_to_s
-    date_time.to_date.strftime('%H:%M')
+    date_time.to_datetime.strftime('%H:%M')
   end
 
   def set_teacher
@@ -41,11 +48,27 @@ class Lesson < ActiveRecord::Base
     end
   end
 
+  def create_registrations
+    students.each do |student|
+      Registration.create(student_id: student.id, lesson_id: self.id )
+    end
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      product = find_by_id(row["id"]) || new
-      product.attributes = row.to_hash.slice(*accessible_attributes)
-      product.save!
+      lesson = find_by_id(row["id"]) || new
+      lesson.attributes = row.to_hash.slice(*accessible_attributes)
+      lesson.klass = Klass.find_or_create_by_name(row["class_name"]) if row["class_name"]
+      lesson.save!
+    end
+  end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |lesson|
+        csv << lesson.attributes.values_at(*column_names)
+      end
     end
   end
 end
