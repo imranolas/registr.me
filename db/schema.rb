@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140325115451) do
+ActiveRecord::Schema.define(:version => 20140403123542) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -34,8 +34,9 @@ ActiveRecord::Schema.define(:version => 20140325115451) do
     t.string   "name"
     t.integer  "teacher_id"
     t.integer  "attendance"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "organisation_id"
   end
 
   create_table "klasses_students", :force => true do |t|
@@ -60,6 +61,12 @@ ActiveRecord::Schema.define(:version => 20140325115451) do
   add_index "lessons", ["klass_id"], :name => "index_lessons_on_klass_id"
   add_index "lessons", ["teacher_id"], :name => "index_lessons_on_teacher_id"
 
+  create_table "organisations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "registrations", :force => true do |t|
     t.integer  "student_id"
     t.integer  "lesson_id"
@@ -77,16 +84,18 @@ ActiveRecord::Schema.define(:version => 20140325115451) do
 
   create_table "students", :force => true do |t|
     t.string   "name"
-    t.boolean  "active",     :default => true, :null => false
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.boolean  "active",          :default => true, :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "organisation_id"
   end
 
   create_table "teachers", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "organisation_id"
   end
 
   add_index "teachers", ["user_id"], :name => "index_teachers_on_user_id"

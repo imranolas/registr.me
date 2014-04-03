@@ -5,6 +5,7 @@ class Student < ActiveRecord::Base
   has_many :lessons, through: :klasses
   has_many :registrations, through: :lessons
   has_many :student_registrations, class_name: 'Registration', foreign_key: 'student_id', dependent: :destroy
+  belongs_to :organisation
 
   validates :name, presence: true, uniqueness: true
   acts_as_commentable

@@ -5,6 +5,7 @@ class Klass < ActiveRecord::Base
   has_many :klasses_students, dependent: :destroy
   has_many :students, through: :klasses_students
   has_many :registrations, through: :lessons, dependent: :destroy
+  belongs_to :organisation
 
   validates :name, presence: true
   validates :attendance, presence: true

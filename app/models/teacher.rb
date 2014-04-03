@@ -2,6 +2,8 @@ class Teacher < ActiveRecord::Base
   belongs_to :user
   has_many :lessons
   attr_accessible :name, :user_id
+  belongs_to :organisation
+
 
   validates :user_id, presence: true
 

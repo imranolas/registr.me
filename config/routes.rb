@@ -1,5 +1,8 @@
 Attend::Application.routes.draw do
 
+  resources :organisations
+
+
   devise_for :users, :controllers => { :invitations => 'users/invitations'}
 
     devise_scope :user do
