@@ -37,9 +37,7 @@ class LessonsController < ApplicationController
   # GET /lessons/1/edit
   def edit
     @lesson = Lesson.find(params[:id])
-    @lesson.students.each do |student|
-      Registration.create(student_id: student.id, lesson_id: @lesson.id )
-    end
+    
   end
 
   # POST /lessons
@@ -65,6 +63,9 @@ class LessonsController < ApplicationController
   # PUT /lessons/1.json
   def update
     @lesson = Lesson.find(params[:id])
+    @lesson.students.each do |student|
+      Registration.create(student_id: student.id, lesson_id: @lesson.id )
+    end
 
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])

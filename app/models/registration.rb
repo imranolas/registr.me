@@ -15,7 +15,7 @@ class Registration < ActiveRecord::Base
   validates :student_id, uniqueness: { scope: :lesson_id }
   validates :klass_id, presence: true
 
-  # before_validation :set_klass_id
+  before_validation :set_klass_id
 
   def set_klass_id
     self.klass_id ||= lesson.klass_id
