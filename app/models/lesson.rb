@@ -26,15 +26,15 @@ class Lesson < ActiveRecord::Base
   end
 
   def date_to_s
-    date_time.to_date.strftime('%d-%m-%Y')
+    date_time.to_date.strftime('%d-%m-%Y') if date_time
   end
 
   def date_us
-    date_time.to_datetime.strftime("%d/%m/%Y")
+    date_time.to_datetime.strftime("%d/%m/%Y") if date_time
   end
 
   def time_to_s
-    date_time.to_datetime.strftime('%H:%M')
+    date_time.to_datetime.strftime('%H:%M') if date_time
   end
 
   def set_teacher
