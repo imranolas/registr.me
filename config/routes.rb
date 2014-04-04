@@ -1,34 +1,33 @@
 Attend::Application.routes.draw do
 
-  resources :organisations
-
+  resources :registrations
+  resources :comments
 
   devise_for :users, :controllers => { :invitations => 'users/invitations'}
-
-    devise_scope :user do
-      put "/confirm" => "confirmations#confirm"
-    end
-
-
-
-
+  
+  devise_scope :user do
+    put "/confirm" => "confirmations#confirm"
+  end
+  
   put 'students/edit_multiple', to: 'students#edit_multiple', as: 'edit_multiple_students'
   put 'students/update_multiple', to: 'students#update_multiple', as: 'update_multiple_students'
   put 'lessons/edit_multiple', to: 'lessons#edit_multiple', as: 'edit_multiple_lessons'
   put 'lessons/update_multiple', to: 'lessons#update_multiple', as: 'update_multiple_lessons'
+
+  resources :organisations do
   
-  resources :students do
-    collection { post :import }
-  end
+    resources :students do
+      collection { post :import }
+    end
 
-  resources :registrations
-
-  resources :comments
-  resources :lessons do
-    collection { post :import }
-  end
-  resources :klasses do
-    resources :build, controller: 'klasses/build'
+    resources :lessons do
+      collection { post :import }
+    end
+    
+    resources :klasses do
+      resources :build, controller: 'klasses/build'
+    end
+    
   end
   
   root to: 'home#index'

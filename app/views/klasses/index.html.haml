@@ -13,7 +13,7 @@
   %tbody
     - @klasses.each do |klass|
       %tr
-        %td= link_to klass.name, klass_path(klass)
+        %td= link_to klass.name, organisation_klass_path(@organisation, klass)
         %td= klass.teacher.name
         %td #{klass.attendance}%
         %td= klass.overall_attendance
@@ -22,4 +22,4 @@
         %td
           %span.badge= klass.students.count
 
-= link_to 'Create a class', new_klass_path, :class => 'btn btn-primary'
+= link_to 'Create a class', new_organisation_klass_path(@organisation), :class => 'btn btn-primary'

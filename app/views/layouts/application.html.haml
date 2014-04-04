@@ -43,13 +43,13 @@
 
       .row-fluid
         .span2
-          - if current_user
+          - if current_user && @organisation
             .sidebar-nav
               %ul.nav.nav-list
-                %li.nav-header Sidebar
-                %li= link_to "Classes", klasses_path
-                %li= link_to "Lessons", lessons_path
-                %li= link_to "Students", students_path
+                %li.nav-header= @organisation.name
+                %li= link_to "Classes", organisation_klasses_path(@organisation)
+                %li= link_to "Lessons", organisation_lessons_path(@organisation)
+                %li= link_to "Students", organisation_students_path(@organisation)
         .span9
           = bootstrap_flash
           = yield

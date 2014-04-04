@@ -13,9 +13,9 @@
   #legend
 
 .form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), klasses_path, :class => 'btn btn-primary'
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_klass_path(@klass), :class => 'btn btn-primary'
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), klass_path(@klass), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  = link_to t('.back', :default => t("helpers.links.back")), organisation_klasses_path(@organisation), :class => 'btn btn-primary'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_organisation_klass_path(@organisation, @klass), :class => 'btn btn-primary'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), organisation_klass_path(@organisation, @klass), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
 
 %ul.nav.nav-tabs#Tabs
   %li.active
@@ -40,7 +40,7 @@
       %tbody
         - @klass.students.each do |student|
           %tr{ class: ("danger" unless student.attendance_met_for(@klass)) }
-            %td= link_to student.name, student_path(student)
+            %td= link_to student.name, organisation_student_path(@organisation, student)
             %td
               - if student.active
                 = raw("<span class='input-icon fui-check-inverted'></span>")

@@ -1,8 +1,10 @@
 class KlassesController < ApplicationController
+  before_filter :get_organisation
+
   # GET /klasses
   # GET /klasses.json
   def index
-    @klasses = Klass.all
+    @klasses = @organisation.klasses
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +46,7 @@ class KlassesController < ApplicationController
 
     respond_to do |format|
       if @klass.save
-        format.html { redirect_to @klass, notice: 'Klass was successfully created.' }
+        format.html { redirect_to [@organisation, @klass], notice: 'Klass was successfully created.' }
         format.json { render json: @klass, status: :created, location: @klass }
       else
         format.html { render action: "new" }
@@ -59,8 +61,8 @@ class KlassesController < ApplicationController
     @klass = Klass.find(params[:id])
 
     respond_to do |format|
-      if @klass.update_attributes(params[:klass])
-        format.html { redirect_to @klass, notice: 'Klass was successfully updated.' }
+      if klass.update_attributes(params[:klass])
+        format.html { redirect_to [@organisation, @klass], notice: 'Klass was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +78,7 @@ class KlassesController < ApplicationController
     @klass.destroy
 
     respond_to do |format|
-      format.html { redirect_to klasses_url }
+      format.html { redirect_to organisation_klasses_path(@organisation) }
       format.json { head :no_content }
     end
   end
@@ -85,4 +87,11 @@ class KlassesController < ApplicationController
     Klass.import(params[:file])
     redirect_to root_url, notice: "Students imported."
   end
+
+  protected
+
+  def get_organisation
+    @organisation = Organisation.find(params[:organisation_id])
+  end
+
 end

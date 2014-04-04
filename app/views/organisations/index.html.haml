@@ -1,0 +1,19 @@
+%h1 Listing organisations
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @organisations.each do |organisation|
+    %tr
+      %td= organisation.name
+      %td= link_to 'Show', organisation
+      %td= link_to 'Edit', edit_organisation_path(organisation)
+      %td= link_to 'Destroy', organisation, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Organisation', new_organisation_path
