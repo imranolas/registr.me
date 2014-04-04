@@ -50,7 +50,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to @lesson, notice: 'Lesson was successfully created.' }
+        format.html { redirect_to [@organisation, @lesson], notice: 'Lesson was successfully created.' }
         format.json { render json: @lesson, status: :created, location: @lesson }
       else
         format.html { render action: "new" }
@@ -69,7 +69,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])
-        format.html { redirect_to @lesson, notice: 'Lesson was successfully updated.' }
+        format.html { redirect_to [@organisation, @lesson], notice: 'Lesson was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -85,7 +85,7 @@ class LessonsController < ApplicationController
     @lesson.destroy
 
     respond_to do |format|
-      format.html { redirect_to lessons_url }
+      format.html { redirect_to organisation_lessons_path(@organisation) }
       format.json { head :no_content }
     end
   end
@@ -94,7 +94,7 @@ class LessonsController < ApplicationController
     if params[:lesson_ids]
       @lessons = Lesson.find(params[:lesson_ids])
     else
-      redirect_to lessons_path
+      redirect_to organisation_lessons_path(@organisation)
     end
   end
 
@@ -104,7 +104,7 @@ class LessonsController < ApplicationController
       lesson.update_attributes(params[:lesson].reject { |k,v| v.blank? })
     end
     if @lessons.empty?
-      redirect_to lessons_path
+      redirect_to organisation_lessons_path(@organisation)
     else
       render "edit_multiple"
     end

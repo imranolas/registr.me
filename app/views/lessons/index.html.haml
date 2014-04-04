@@ -1,7 +1,7 @@
 - model_class = Lesson
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-  = link_to "CSV", lessons_path(format: "csv")
+  = link_to "CSV", organisation_lessons_path(@organisation, format: "csv")
 
 %ul.nav.nav-tabs#Tabs
   %li.active
@@ -14,10 +14,11 @@
   / Home tab
   .tab-pane.fade.in.active#upcoming
     = render partial: 'shared/lesson_table', locals: {lessons: @upcoming}
-    = link_to t('.new', :default => t("helpers.links.new")), new_lesson_path, :class => 'btn btn-primary'
 
 
   .tab-pane.fade#past
     = render partial: 'shared/lesson_table', locals: {lessons: @past, title: 'data_past_lessons'}
 
-= render partial: 'shared/csv_form', locals: { title: "Lessons", path: import_lessons_path }
+= link_to t('.new', :default => t("helpers.links.new")), new_organisation_lesson_path, :class => 'btn btn-primary'
+
+= render partial: 'shared/csv_form', locals: { title: "Lessons", path: import_organisation_lessons_path(@organisation) }
