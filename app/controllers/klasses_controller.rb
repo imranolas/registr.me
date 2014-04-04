@@ -1,5 +1,4 @@
 class KlassesController < ApplicationController
-  before_filter :get_organisation
 
   # GET /klasses
   # GET /klasses.json
@@ -86,12 +85,6 @@ class KlassesController < ApplicationController
   def import
     Klass.import(params[:file])
     redirect_to root_url, notice: "Students imported."
-  end
-
-  protected
-
-  def get_organisation
-    @organisation = Organisation.find(params[:organisation_id])
   end
 
 end
