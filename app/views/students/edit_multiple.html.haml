@@ -1,6 +1,6 @@
 %h1 Edit Checked Students
 
-= form_tag update_multiple_students_path, method: :put do
+= form_tag organisation_update_multiple_students_path(@organisation), method: :put do
   - @students.each do |student|
     = hidden_field_tag "student_ids[]", student.id
     %span.badge= student.name

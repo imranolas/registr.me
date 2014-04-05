@@ -1,7 +1,7 @@
-= simple_form_for @student, :html => { :class => 'form-horizontal' } do |f|
+= simple_form_for [@organisation, @student], :html => { :class => 'form-horizontal' } do |f|
   = f.input :name
   = f.input :active, input_html: { data: {toggle: 'checkbox'}}
   = f.association :klasses, collection: Klass.all, as: :check_boxes, input_html: { data: {toggle: 'checkbox'}}, label: 'Classes'
   .form-actions
     = f.button :submit, :class => 'btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), students_path, :class => 'btn'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), organisation_students_path(@organisation), :class => 'btn'
