@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
   
   def show
-    @lesson = Lesson.find(params[:id])
+    @lesson = @organisation.lessons.find(params[:id])
   end
 
   def update

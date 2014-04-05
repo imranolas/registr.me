@@ -2,8 +2,8 @@ class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
   def index
-    @upcoming = Lesson.upcoming
-    @past = Lesson.past
+    @upcoming = @organisation.lessons.upcoming
+    @past = @organisation.lessons.past
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class LessonsController < ApplicationController
   # GET /lessons/1
   # GET /lessons/1.json
   def show
-    @lesson = Lesson.find(params[:id])
+    @lesson = @organisation.lessons.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,7 +36,7 @@ class LessonsController < ApplicationController
 
   # GET /lessons/1/edit
   def edit
-    @lesson = Lesson.find(params[:id])
+    @lesson = @organisation.lessons.find(params[:id])
     
   end
 
@@ -44,12 +44,12 @@ class LessonsController < ApplicationController
   # POST /lessons.json
   def create
     @lesson = Lesson.new(params[:lesson])
-    @lesson.students.each do |student|
-      Registration.create(student_id: student.id, lesson_id: @lesson.id )
-    end
 
     respond_to do |format|
       if @lesson.save
+        @lesson.students.each do |student|
+          Registration.create(student_id: student.id, lesson_id: @lesson.id )
+        end
         format.html { redirect_to [@organisation, @lesson], notice: 'Lesson was successfully created.' }
         format.json { render json: @lesson, status: :created, location: @lesson }
       else
@@ -62,7 +62,7 @@ class LessonsController < ApplicationController
   # PUT /lessons/1
   # PUT /lessons/1.json
   def update
-    @lesson = Lesson.find(params[:id])
+    @lesson = @organisation.lessons.find(params[:id])
     @lesson.students.each do |student|
       Registration.create(student_id: student.id, lesson_id: @lesson.id )
     end
@@ -81,7 +81,7 @@ class LessonsController < ApplicationController
   # DELETE /lessons/1
   # DELETE /lessons/1.json
   def destroy
-    @lesson = Lesson.find(params[:id])
+    @lesson = @organisation.lessons.find(params[:id])
     @lesson.destroy
 
     respond_to do |format|
@@ -92,14 +92,14 @@ class LessonsController < ApplicationController
 
   def edit_multiple
     if params[:lesson_ids]
-      @lessons = Lesson.find(params[:lesson_ids])
+      @lessons = @organisation.lessons.find(params[:lesson_ids])
     else
       redirect_to organisation_lessons_path(@organisation)
     end
   end
 
   def update_multiple
-    @lessons = Lesson.find(params[:lesson_ids])
+    @lessons = @organisation.lessons.find(params[:lesson_ids])
     @lessons.reject! do |lesson|
       lesson.update_attributes(params[:lesson].reject { |k,v| v.blank? })
     end

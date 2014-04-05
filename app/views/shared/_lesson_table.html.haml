@@ -1,6 +1,6 @@
 - model_class = Lesson
 - title ||= nil
-= form_tag edit_multiple_lessons_path, method: :put do
+= form_tag organisation_edit_multiple_lessons_path(@organisation), method: :put do
   %table.table{class: (title || 'data_lessons')}
     %thead
       %tr

@@ -3,4 +3,6 @@ class Organisation < ActiveRecord::Base
   has_many :teachers
   has_many :klasses
   has_many :students
+  has_many :lessons, through: :klasses
+  has_many :registrations, through: :lessons
 end

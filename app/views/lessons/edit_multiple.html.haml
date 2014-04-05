@@ -1,6 +1,6 @@
 %h1 Edit Checked Lessons
 
-= form_tag update_multiple_lessons_path, method: :put do
+= form_tag organisation_update_multiple_lessons_path(@organisation), method: :put do
   - @lessons.each do |lesson|
     = hidden_field_tag "lesson_ids[]", lesson.id
     %h5 #{lesson.date_to_s}, #{lesson.time_to_s}, #{lesson.room}
