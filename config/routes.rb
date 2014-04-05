@@ -1,6 +1,5 @@
 Attend::Application.routes.draw do
 
-  resources :registrations
   resources :comments
 
   devise_for :users, :controllers => { :invitations => 'users/invitations'}
@@ -15,7 +14,6 @@ Attend::Application.routes.draw do
   put 'lessons/update_multiple', to: 'lessons#update_multiple', as: 'update_multiple_lessons'
 
   resources :organisations do
-  
     resources :students do
       collection { post :import }
     end
@@ -27,7 +25,8 @@ Attend::Application.routes.draw do
     resources :klasses do
       resources :build, controller: 'klasses/build'
     end
-    
+
+    resources :registrations    
   end
   
   root to: 'home#index'
