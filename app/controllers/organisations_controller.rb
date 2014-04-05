@@ -1,4 +1,5 @@
 class OrganisationsController < ApplicationController
+  skip_before_filter :get_organisation
   # GET /organisations
   # GET /organisations.json
   def index

@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
 
   protected
   def after_sign_in_path_for(resource)
-    lessons_path
+    organisations_path
   end
 
   def get_organisation
-    @organisation = Organisation.find(params[:organisation_id])
+    @organisation = Organisation.find(params[:organisation_id]) unless params[:controller] =~ /devise/
   end
 
 
