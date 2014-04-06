@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140403123542) do
+ActiveRecord::Schema.define(:version => 20140406104718) do
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(:version => 20140403123542) do
   add_index "lessons", ["klass_id"], :name => "index_lessons_on_klass_id"
   add_index "lessons", ["teacher_id"], :name => "index_lessons_on_teacher_id"
 
+  create_table "organisation_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "organisation_id"
+    t.string   "role"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "organisation_users", ["organisation_id"], :name => "index_organisation_users_on_organisation_id"
+  add_index "organisation_users", ["user_id"], :name => "index_organisation_users_on_user_id"
+
   create_table "organisations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -96,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20140403123542) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "organisation_id"
+    t.string   "role"
   end
 
   add_index "teachers", ["user_id"], :name => "index_teachers_on_user_id"
