@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    @students = @organisation.students.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
-    @student = Student.find(params[:id])
+    @student = @organisation.students.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,10 +35,7 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
-    @student = Student.find(params[:id])
-    @student.lessons.each do |lesson|
-      Registration.create(student_id: @student.id, lesson_id: lesson.id )
-    end
+    @student = @organisation.students.find(params[:id])
   end
 
   # POST /students
@@ -51,7 +48,7 @@ class StudentsController < ApplicationController
         @student.lessons.each do |lesson|
           Registration.create(student_id: @student.id, lesson_id: lesson.id )
         end
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
+        format.html { redirect_to [@organisation, @student], notice: 'Student was successfully created.' }
         format.json { render json: @student, status: :created, location: @student }
       else
         format.html { render action: "new" }
@@ -63,11 +60,16 @@ class StudentsController < ApplicationController
   # PUT /students/1
   # PUT /students/1.json
   def update
-    @student = Student.find(params[:id])
+    @student = @organisation.students.find(params[:id])
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        
+        @student.lessons.each do |lesson|
+          Registration.create(student_id: @student.id, lesson_id: lesson.id )
+        end
+        
+        format.html { redirect_to [@organisation, @student], notice: 'Student was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,33 +81,36 @@ class StudentsController < ApplicationController
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
-    @student = Student.find(params[:id])
+    @student = @organisation.students.find(params[:id])
     @student.destroy
 
     respond_to do |format|
-      format.html { redirect_to students_url }
+      format.html { redirect_to organisation_students_path(@organisation) }
       format.json { head :no_content }
     end
   end
 
   def edit_multiple
     if params[:student_ids]
-      @students = Student.find(params[:student_ids])
+      @students = @organisation.students.find(params[:student_ids])
     else
-      redirect_to students_path
+      redirect_to organisation_students_path(@organisation)
     end
   end
 
   def update_multiple
-    @students = Student.find(params[:student_ids])
+    @students = @organisation.students.find(params[:student_ids])
     @students.reject! do |student|
       student.update_attributes(params[:student].reject { |k,v| v.blank? })
+    end
+
+    @students.each do |student|
       student.lessons.each do |lesson|
         Registration.create(student_id: student.id, lesson_id: lesson.id )
       end
     end
     if @students.empty?
-      redirect_to students_path
+      redirect_to organisation_students_path(@organisation)
     else
       render "edit_multiple"
     end
@@ -114,7 +119,7 @@ class StudentsController < ApplicationController
   def add_comment
     student = Student.find(params[:id])
     Comment.build_from( student, current_user.id, params[:comment] )
-    redirect_to student
+    redirect_to [@organisation, student]
   end
 
   def import
