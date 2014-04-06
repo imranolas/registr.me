@@ -45,6 +45,7 @@ class OrganisationsController < ApplicationController
 
     respond_to do |format|
       if @organisation.save
+        @organisation.teachers.create user: current_user, role: 'admin'
         format.html { redirect_to @organisation, notice: 'Organisation was successfully created.' }
         format.json { render json: @organisation, status: :created, location: @organisation }
       else

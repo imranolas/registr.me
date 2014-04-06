@@ -43,7 +43,7 @@
 
       .row-fluid
         .span2
-          - if current_user && @organisation
+          - if current_user && @organisation.try(:persisted?)
             .sidebar-nav
               %ul.nav.nav-list
                 %li.nav-header= @organisation.name

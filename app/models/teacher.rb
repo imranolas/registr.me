@@ -1,7 +1,7 @@
 class Teacher < ActiveRecord::Base
   belongs_to :user
   has_many :lessons
-  attr_accessible :name, :user_id
+  attr_accessible :name, :user_id, :user, :role
   belongs_to :organisation
 
 
