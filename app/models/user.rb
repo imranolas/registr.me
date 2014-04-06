@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_one :teacher
+  has_many :teachers
+  has_many :organisations, through: :teachers
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
@@ -8,7 +9,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
   # attr_accessible :title, :body
-  accepts_nested_attributes_for :teacher  
+  accepts_nested_attributes_for :teachers  
 
   def password_required?
     super if confirmed?
