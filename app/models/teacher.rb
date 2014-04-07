@@ -14,4 +14,8 @@ class Teacher < ActiveRecord::Base
   def name
     user.name
   end
+
+  def admin?
+    role == 'admin'
+  end
 end

@@ -1,5 +1,28 @@
 %p#notice= notice
-
+- model_class = Teacher
+.page-header
+  %h1= @organisation.name
+%h3=t '.title', :default => model_class.model_name.human.pluralize.titleize
+= link_to "CSV", organisation_students_path(@organisation, format: "csv")
+= form_tag organisation_edit_multiple_students_path(@organisation), method: :put do
+  .table-responsive
+    %table.table.data
+      %thead
+        %tr
+          %th
+            = check_box_tag :select_all, true, false
+          %th= model_class.human_attribute_name(:name)
+          %th Admin
+      %tbody
+        - @organisation.teachers.each do |teacher|
+          %tr
+            %td
+              = check_box_tag "student_ids[]", teacher.id, false
+            %td= link_to teacher.name, organisation_student_path(@organisation, teacher)
+            %td
+              = display_tick(teacher.admin?)
+  = submit_tag "Edit Checked", class: 'btn btn-primary'
+= link_to t('.new', :default => t("helpers.links.new")), new_organisation_student_path(@organisation), :class => 'btn btn-primary'
 
 = link_to 'Edit', edit_organisation_path(@organisation)
 \|
