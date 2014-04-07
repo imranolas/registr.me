@@ -22,8 +22,7 @@
             %td
               = display_tick(teacher.admin?)
   = submit_tag "Edit Checked", class: 'btn btn-primary'
-= link_to t('.new', :default => t("helpers.links.new")), new_organisation_student_path(@organisation), :class => 'btn btn-primary'
 
-= link_to 'Edit', edit_organisation_path(@organisation)
-\|
-= link_to 'Back', organisations_path
+%h3 Invite a teacher
+=render 'shared/new_user'
+

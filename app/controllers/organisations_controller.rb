@@ -3,7 +3,7 @@ class OrganisationsController < ApplicationController
   # GET /organisations
   # GET /organisations.json
   def index
-    @organisations = Organisation.all
+    @organisations = Organisation.joins(:teachers).where(teachers: { user_id: current_user.id})
 
     respond_to do |format|
       format.html # index.html.erb

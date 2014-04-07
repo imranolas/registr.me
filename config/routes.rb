@@ -15,6 +15,7 @@ Attend::Application.routes.draw do
     put 'lessons/edit_multiple', to: 'lessons#edit_multiple', as: 'edit_multiple_lessons'
     put 'lessons/update_multiple', to: 'lessons#update_multiple', as: 'update_multiple_lessons'
 
+
     resources :students do
       collection { post :import }
     end
@@ -28,6 +29,7 @@ Attend::Application.routes.draw do
     end
 
     resources :registrations
+    devise_for :users, :controllers => { :invitations => 'users/invitations'}
 
   end
   
