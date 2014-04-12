@@ -1,19 +1,9 @@
-%h1 Listing organisations
+%h1 Organisations
 
-%table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-
+%ul.list-group.span5
   - @organisations.each do |organisation|
-    %tr
-      %td= organisation.name
-      %td= link_to 'Show', organisation
-      %td= link_to 'Edit', edit_organisation_path(organisation)
-      %td= link_to 'Destroy', organisation, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    %li.list-group-item
+      %strong= link_to organisation.name, organisation
 
-%br
-
+.clearfix
 = link_to 'New Organisation', new_organisation_path
