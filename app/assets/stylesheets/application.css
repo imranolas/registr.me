@@ -39,6 +39,20 @@
 
 }
 
+body {
+  background: #f7f7f7;
+}
+
+.hero {
+  width: 450px;
+  margin: 100px auto 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 100px;
+}
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
