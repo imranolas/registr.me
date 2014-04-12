@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
-  
+  load_and_authorize_resource through: :organisation
+
   def show
     @lesson = @organisation.lessons.find(params[:id])
   end

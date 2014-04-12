@@ -1,5 +1,5 @@
 class KlassesController < ApplicationController
-
+  load_and_authorize_resource through: :organisation
   # GET /klasses
   # GET /klasses.json
   def index

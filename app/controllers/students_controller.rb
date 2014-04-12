@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  load_and_authorize_resource through: :organisation
   # GET /students
   # GET /students.json
   def index
