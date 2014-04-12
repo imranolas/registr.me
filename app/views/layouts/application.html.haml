@@ -32,6 +32,7 @@
             %ul.nav
               %li= link_to "LOGIN", new_user_session_path unless current_user
               %li= link_to "LOGOUT", destroy_user_session_path, method: :delete if current_user
+              %li= link_to "Organisations", organisations_path if current_user
               
               - if current_user  
                 = drop_down raw("<span class='fui-gear'></span>") do 
