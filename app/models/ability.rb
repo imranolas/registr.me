@@ -12,6 +12,7 @@ class Ability
       # end
       can :read, Organisation, teachers: { user_id: user.id }
       can :manage, Organisation, teachers: { user_id: user.id, role: 'admin' }
+      can :create, Organisation
 
     #
     # The first argument to `can` is the action you are giving the user
