@@ -117,12 +117,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  def add_comment
-    student = Student.find(params[:id])
-    Comment.build_from( student, current_user.id, params[:comment] )
-    redirect_to [@organisation, student]
-  end
-
   def import
     Student.import(params[:file])
     redirect_to root_url, notice: "Students imported."

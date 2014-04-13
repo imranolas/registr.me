@@ -8,7 +8,6 @@ class Student < ActiveRecord::Base
   belongs_to :organisation
 
   validates :name, presence: true, uniqueness: true
-  acts_as_commentable
 
   def attendance_met_for(klass)
     klass.student_attendance(self) >= klass.attendance
