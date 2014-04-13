@@ -70,22 +70,22 @@
 
   var data = [
     {
-      value : #{@student.student_registrations.ontime.count},
+      value : #{@student.student_registrations.completed_lessons.ontime.count},
       color : "#3fb932",
       title: "On time"
     },
     {
-      value: #{@student.student_registrations.late.count},
+      value: #{@student.student_registrations.completed_lessons.late.count},
       color:"#00b3b9",
       title: 'Late'
     },
     {
-      value : #{@student.student_registrations.approved_absence.count},
+      value : #{@student.student_registrations.completed_lessons.approved_absence.count},
       color : "#ffa940",
       title: 'Absent (approved)'
     },
     {
-      value : #{@student.student_registrations.unapproved_absence.count},
+      value : #{@student.student_registrations.completed_lessons.unapproved_absence.count},
       color : "#ff4137",
       title: 'Absent (unapproved)'
     }
