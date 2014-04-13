@@ -10,10 +10,10 @@
   .field.bfh-timepicker{ data: { name: 'lesson[time]', time: @lesson.time_to_s, format: 'H-M'} }
   .field
     = f.label :teacher_id
-    = f.collection_select(:teacher_id, Teacher.all, :id, :name)
+    = f.collection_select(:teacher_id, @organisation.teachers, :id, :name)
   .field
     = f.label :klass
-    = f.collection_select(:klass_id, Klass.all, :id, :name)
+    = f.collection_select(:klass_id, @organisation,klasses, :id, :name)
   .field
     = f.label :room
     = f.text_field :room

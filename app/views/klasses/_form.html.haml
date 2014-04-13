@@ -12,7 +12,7 @@
   .control-group
     = f.label :teacher_id, :class => 'control-label'
     .controls
-      = f.collection_select(:teacher_id, Teacher.all, :id, :name)
+      = f.collection_select(:teacher_id, @organisation.teachers, :id, :name)
   .control-group
     = f.label :attendance, :class => 'control-label'
     .input-group.controls

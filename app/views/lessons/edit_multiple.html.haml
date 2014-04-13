@@ -7,7 +7,7 @@
   = simple_fields_for Lesson.new do |f|
 
     .field
-      = f.association :klass, collection: Klass.all, as: :radio, input_html: { data: {toggle: 'radio'}}, label: 'Classes'
+      = f.association :klass, collection: @organisation.klasses, as: :radio, input_html: { data: {toggle: 'radio'}}, label: 'Classes'
 
   .actions
     = submit_tag "Update"
