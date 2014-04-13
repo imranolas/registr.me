@@ -72,7 +72,7 @@ class Klass < ActiveRecord::Base
           title: 'Late'
         }]
       }
-    lessons(:date_time).includes(:registrations).each do |l|
+    lessons.past.includes(:registrations).each do |l|
       hsh[:labels] << l.date_time.to_datetime.strftime('%d %b %Y')
       hsh[:datasets][0][:data] << l.registrations.where(attended: true).count
       hsh[:datasets][1][:data] << l.registrations.where(late: true).count
