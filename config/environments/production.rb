@@ -19,7 +19,7 @@ Attend::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-  config.action_mailer.default_url_options = { :host => 'registr.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'smtp.gmail.com' }
 
 
   # Defaults to nil and saved in location specified by config.assets.prefix
