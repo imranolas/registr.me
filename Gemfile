@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.17'
-
+ruby '2.0.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'devise'
 gem 'devise_invitable'
 gem 'haml-rails'
@@ -13,13 +12,13 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'bootstrap-datetimepicker-rails'
 gem 'bootstrap_tokenfield_rails'
 gem "rspec-rails", :group => [:test, :development]
-gem "wicked"
+# gem "wicked"
 gem 'designmodo-flatuipro-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'simple_form'
-gem 'acts_as_commentable_with_threading'
-gem 'prawn'
+# gem 'acts_as_commentable_with_threading'
+# gem 'prawn'
 gem "cancancan"
 
 group :test do
@@ -40,6 +39,14 @@ group :development do
   gem 'letter_opener'
   gem 'launchy'
   gem 'faker'
+end
+
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem "pg"
 end
 
 
