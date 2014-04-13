@@ -39,6 +39,20 @@
 
 }
 
+body {
+  background: #f7f7f7;
+}
+
+.hero {
+  width: 450px;
+  margin: 100px auto 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 100px;
+}
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -205,6 +219,10 @@ float: right;
 div.field.bfh-timepicker > div.input-group.bfh-timepicker-toggle > input, div.field.bfh-datepicker > div.input-group.bfh-datepicker-toggle > input {
 color: #000;
 }
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background: initial;
+  }
 
 @media (max-width: 767px) {
 

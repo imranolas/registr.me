@@ -20,6 +20,7 @@ gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'simple_form'
 gem 'acts_as_commentable_with_threading'
 gem 'prawn'
+gem "cancancan"
 
 group :test do
   gem "factory_girl_rails"
