@@ -13,11 +13,12 @@ class Student < ActiveRecord::Base
     klass.student_attendance(self) >= klass.attendance
   end
 
-  def self.import(file)
+  def self.import(file, organisation)
     CSV.foreach(file.path, headers: true) do |row|
       student = find_by_id(row["id"]) || new
       student.attributes = row.to_hash.slice(*accessible_attributes)
       student.save!
+      organisation.students << student
     end
   end
 

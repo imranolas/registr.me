@@ -119,7 +119,7 @@ class StudentsController < ApplicationController
   end
 
   def import
-    Student.import(params[:file])
-    redirect_to root_url, notice: "Students imported."
+    Student.import(params[:file],@organisation)
+    redirect_to organisation_students_path(@organisation), notice: "Students imported."
   end
 end

@@ -7,7 +7,7 @@
   = simple_fields_for Student.new do |f|
 
     .field
-      = f.association :klasses, collection: Klass.all, as: :check_boxes, input_html: { data: {toggle: 'checkbox'}}, label: 'Classes'
+      = f.association :klasses, collection: @organisation.klasses, as: :check_boxes, input_html: { data: {toggle: 'checkbox'}}, label: 'Classes'
 
   .actions
     = submit_tag "Update"
