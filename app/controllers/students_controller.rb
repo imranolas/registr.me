@@ -46,6 +46,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
+        @organisation.students << @student
         @student.lessons.each do |lesson|
           Registration.create(student_id: @student.id, lesson_id: lesson.id )
         end
