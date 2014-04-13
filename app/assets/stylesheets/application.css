@@ -220,6 +220,10 @@ div.field.bfh-timepicker > div.input-group.bfh-timepicker-toggle > input, div.fi
 color: #000;
 }
 
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background: initial;
+  }
+
 @media (max-width: 767px) {
 
   input[id^=klass_lessons_attribute] {
