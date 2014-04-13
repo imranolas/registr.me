@@ -228,6 +228,7 @@ tr.inactive {
   color: #ccc;
 }
 
+
 @media (max-width: 767px) {
 
   input[id^=klass_lessons_attribute] {

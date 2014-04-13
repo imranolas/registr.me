@@ -36,5 +36,11 @@ module ApplicationHelper
     InstanceTag.new(object_name, method, self, options.delete(:object)).to_input_field_tag("datetime", options)
   end
 
-  
+  def address(organisation)
+    html = "<address>"
+    html += "<strong>#{organisation.name}</strong><br>"
+    html += [organisation.address1, organisation.address2, organisation.address3, organisation.town, organisation.postcode].compact.reject(&:blank?).map { |a| "#{a}<br>" }.join
+    html += "</address>"
+    raw(html)
+  end
 end

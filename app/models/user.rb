@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
     confirmable
   end
 
+  def admin_for(organisation)
+    organisation.teachers.where(user_id: self.id).any?
+  end
+
 end

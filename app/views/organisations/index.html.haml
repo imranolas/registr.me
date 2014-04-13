@@ -1,12 +1,16 @@
 %h1 Organisations
 
-%ul.list-group.span5
-  - unless @organisations.any?
-    %p You currently have no organisations to contribute to. <br/> Ask a colleague to invite you to an existing organisation or #{link_to "create a new one", new_organisation_path}.
-  %p
-  - @organisations.each do |organisation|
-    %li.list-group-item
-      %strong= link_to organisation.name, organisation
+- unless @organisations.any?
+  %p You currently have no organisations to contribute to. <br/> Ask a colleague to invite you to an existing organisation or #{link_to "create a new one", new_organisation_path}.
+%p
+- @organisations.each do |organisation|
+  .col-sm-6.col-md-4.organisation-item
+    .thumbnail
+      .caption
+        %p= address(organisation)
+        %p
+          = link_to "View", organisation_lessons_path(organisation), class: 'btn btn-mini btn-primary'
+          = link_to "Manage", organisation, class: 'btn btn-mini btn-primary' if current_user.admin_for(organisation)
 
 .clearfix
 = link_to 'New Organisation', new_organisation_path, class: 'btn btn-primary'
