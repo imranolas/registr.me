@@ -1,4 +1,4 @@
-= simple_form_for resource, :as => resource_name, :url => user_organisation_invitation_path(@organisation, resource_name), remote: true, :html => {:method => :post, class: 'col-md-6'} do |f|
+= simple_form_for resource, :as => resource_name, :url => user_organisation_invitation_path(@organisation, resource_name), :html => {:method => :post, class: 'col-md-6'} do |f|
   = devise_error_messages!
 
   = f.input :email

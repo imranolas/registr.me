@@ -18,7 +18,7 @@
           %tr
             %td
               = check_box_tag "student_ids[]", teacher.id, false
-            %td= link_to teacher.name, organisation_student_path(@organisation, teacher)
+            %td= link_to (teacher.name || teacher.user.email), organisation_student_path(@organisation, teacher)
             %td
               = display_tick(teacher.admin?)
   = submit_tag "Edit Checked", class: 'btn btn-primary'
