@@ -19,8 +19,16 @@ Attend::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-  config.action_mailer.default_url_options = { :host => 'smtp.gmail.com' }
-
+  config.action_mailer.default_url_options = { :host => 'registr.herokuapp.com' }
+  
+  ActionMailer::Base.smtp_settings = {
+  :address        => 'smtp.gmail.com',
+  :port           => '465',
+  :authentication => :plain,
+  :user_name      => ENV['GMAIL_USERNAME'],
+  :password       => ENV['GMAIL_PASSWORD'],
+  :enable_starttls_auto => true
+  }
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
