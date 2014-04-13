@@ -27,7 +27,44 @@
 .tab-content
   / Home tab
   .tab-pane.fade.in.active#lessons
-    = render partial: 'shared/lesson_table', locals: {lessons: @klass.lessons.order(:date_time)}
+    - model_class = Lesson
+    - title ||= nil
+    = form_tag organisation_edit_multiple_lessons_path(@organisation), method: :put do
+      %table.table{class: (title || 'data_lessons')}
+        %thead
+          %tr
+            %th= check_box_tag :select_all, true, false
+            %th= 'Date'
+            %th= 'Time'
+            %th= model_class.human_attribute_name(:teacher_id)
+            %th= 'Class'
+            %th= 'Students'
+            / %th= "Registered"
+            %th= "Attendance"
+            %th= model_class.human_attribute_name(:room)
+            %th=t '.actions', :default => t("helpers.actions")
+        %tbody
+          - @klass.lessons.each do |lesson|
+            %tr{ class: ("inactive" if lesson.date_time.to_date > Date.today) }
+              %td
+                / = label_tag nil, class: 'checkbox' do
+                = check_box_tag "lesson_ids[]", lesson.id, false#,  "data-toggle"=> 'checkbox'
+              %td= lesson.date_time.to_datetime.strftime('%d %b %Y') if lesson.date_time
+              %td= lesson.date_time.to_datetime.strftime('%H:%M%p') if lesson.date_time
+              %td= lesson.teacher.name if lesson.teacher
+              %td= lesson.klass.name if lesson.klass
+              %td
+                %span.badge= lesson.students.count
+              / %td= display_tick(lesson.registrations.any?)
+              %td= lesson.attendance
+              %td= lesson.room
+              %td
+                = link_to "View", organisation_lesson_path(@organisation, lesson), class: 'btn btn-mini btn-primary'
+                = link_to "Register", organisation_registration_path(@organisation,lesson), class: 'btn btn-mini btn-primary'
+                / = link_to t('.edit', :default => t("helpers.links.edit")), edit_lesson_path(lesson), :class => 'btn btn-mini'
+                / = link_to t('.destroy', :default => t("helpers.links.destroy")), lesson_path(lesson), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+      = submit_tag "Edit Checked", class: 'btn btn-primary'
+
 
   .tab-pane.fade#students
     - model_class = Student
