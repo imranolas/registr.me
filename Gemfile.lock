@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/rweng/jquery-datatables-rails.git
-  revision: 788a7b24caf8fe58a5493aa3f6a065879a9f752a
-  specs:
-    jquery-datatables-rails (1.12.2)
-      jquery-rails
-      sass-rails
-
-GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: 965ebd304f74c66a020c03599709ab264914f7f1
   specs:
@@ -15,6 +7,16 @@ GIT
       execjs
       rails (>= 3.1)
       railties (>= 3.1)
+
+GIT
+  remote: https://github.com/rweng/jquery-datatables-rails.git
+  revision: d486b31b192a2924b1913e080ad23460e6b96d31
+  specs:
+    jquery-datatables-rails (3.4.0)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
+      sass-rails
 
 GEM
   remote: https://rubygems.org/
@@ -87,6 +89,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     columnize (0.3.6)
+    concurrent-ruby (1.1.9)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     designmodo-flatuipro-rails (1.1.4.2)
@@ -136,7 +139,8 @@ GEM
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
     hike (1.2.3)
-    i18n (0.6.9)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     journey (1.0.4)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
